@@ -2,24 +2,25 @@
 
 const { z } = require('zod');
 
-const taskStatusEnum = z.enum(['todo', 'in_progress', 'done']);
-const taskPriorityEnum = z.enum(['low', 'medium', 'high']);
+const taskStatusEnum = z.enum(['todo', 'in_progress', 'done']).openapi({ example: 'todo' });
+const taskPriorityEnum = z.enum(['low', 'medium', 'high']).openapi({ example: 'medium' });
 
 const createTaskSchema = z.object({
-  title: z.string().min(1, 'title is required'),
-  description: z.string().optional(),
+  title: z.string().min(1, 'title is required').openapi({ example: 'Complete documentation' }),
+  description: z.string().optional().openapi({ example: 'Finish the OpenAPI integration for the backend' }),
   priority: taskPriorityEnum.default('medium'),
-  assignee_id: z.string().uuid('assignee_id must be a valid UUID').optional().nullable(),
+  assignee_id: z.string().uuid('assignee_id must be a valid UUID').optional().nullable().openapi({ example: '123e4567-e89b-12d3-a456-426614174000' }),
   due_date: z
     .string()
     .regex(/^\d{4}-\d{2}-\d{2}$/, 'due_date must be a valid ISO date (YYYY-MM-DD)')
     .optional()
-    .nullable(),
+    .nullable()
+    .openapi({ example: '2024-12-31' }),
 });
 
 const updateTaskSchema = z.object({
-  title: z.string().min(1, 'title must not be empty').optional(),
-  description: z.string().optional().nullable(),
+  title: z.string().min(1, 'title must not be empty').optional().openapi({ example: 'Updated title' }),
+  description: z.string().optional().nullable().openapi({ example: 'Updated description' }),
   status: taskStatusEnum.optional(),
   priority: taskPriorityEnum.optional(),
   assignee_id: z.string().uuid('assignee_id must be a valid UUID').optional().nullable(),
@@ -36,8 +37,8 @@ const updateTaskSchema = z.object({
 const taskFilterSchema = z.object({
   status: taskStatusEnum.optional(),
   assignee: z.string().uuid('assignee must be a valid UUID').optional(),
-  page: z.coerce.number().int().min(1).default(1),
-  limit: z.coerce.number().int().min(1).max(100).default(20),
+  page: z.coerce.number().int().min(1).default(1).openapi({ example: 1 }),
+  limit: z.coerce.number().int().min(1).max(100).default(20).openapi({ example: 20 }),
 });
 
 module.exports = { createTaskSchema, updateTaskSchema, taskFilterSchema };

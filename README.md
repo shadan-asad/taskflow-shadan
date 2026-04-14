@@ -306,9 +306,5 @@ All responses are `Content-Type: application/json`.
 | **Redis caching** | Cache `GET /projects/:id/stats` and project lists in Redis with a short TTL; invalidate on mutation |
 | **Role system** | Add a `project_members` join table with roles (`viewer`, `editor`, `admin`) instead of binary owner/assignee |
 | **Soft deletes** | Add `deleted_at` column + filter in all queries; expose `DELETE /tasks/:id/restore` |
-| **Cursor pagination** | Replace offset/limit with keyset (cursor) pagination for large datasets — avoids drift on inserts |
-| **OpenAPI spec** | Auto-generate `openapi.yaml` from Zod schemas using `zod-to-openapi`; serve Swagger UI at `/docs` |
 | **TypeScript** | Migrate to TypeScript for end-to-end type safety from DB row to HTTP response |
 | **CI/CD pipeline** | GitHub Actions: lint → test → build Docker image → push to registry → deploy |
-| **Observability** | Add OpenTelemetry spans, integrate with Datadog or Grafana Loki + Tempo |
-| **Connection pooling** | Use PgBouncer in front of PostgreSQL for connection multiplexing at scale |
