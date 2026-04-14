@@ -7,8 +7,10 @@
  */
 module.exports = {
   databaseUrl: process.env.DATABASE_URL,
+  ...(process.env.NODE_ENV === 'production' && {
+    ssl: { rejectUnauthorized: false },
+  }),
   migrationsTable: 'pgmigrations',
   dir: 'migrations',
-  // Use plain SQL files (no JavaScript wrapper needed)
   decamelize: true,
 };

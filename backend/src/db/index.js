@@ -5,6 +5,10 @@ const logger = require('../logger');
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
+  // Required for Render PostgreSQL in production
+  ssl: process.env.NODE_ENV === 'production' 
+    ? { rejectUnauthorized: false } 
+    : false,
   // Keep connection pool reasonable for production
   max: 20,
   idleTimeoutMillis: 30_000,
