@@ -1,0 +1,44 @@
+{
+  "name": "taskflow-api",
+  "version": "1.0.0",
+  "description": "TaskFlow — Production-ready task management REST API",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "migrate:up": "node-pg-migrate up",
+    "migrate:down": "node-pg-migrate down",
+    "seed": "psql $DATABASE_URL -f seeds/seed.sql",
+    "test": "jest --runInBand --forceExit"
+  },
+  "dependencies": {
+    "-": "^0.0.1",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.11.3",
+    "pino": "^8.18.0",
+    "pino-http": "^9.0.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "dotenv": "^17.4.2",
+    "jest": "^29.7.0",
+    "node-pg-migrate": "^6.2.2",
+    "nodemon": "^3.0.3",
+    "pino-pretty": "^11.0.0",
+    "supertest": "^6.3.4"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "setupFiles": [
+      "<rootDir>/jest.setup.js"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.test.js"
+    ]
+  }
+}

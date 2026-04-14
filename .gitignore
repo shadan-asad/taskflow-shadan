@@ -1,0 +1,10 @@
+# Root .gitignore
+.DS_Store
+
+# Backend
+backend/node_modules/
+backend/.env
+backend/*.log
+backend/coverage/
+backend/dist/
+backend/jest.setup.js

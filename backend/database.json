@@ -1,0 +1,14 @@
+'use strict';
+
+/**
+ * node-pg-migrate configuration
+ * Reads DATABASE_URL from the environment (loaded from .env by the start script
+ * or injected by Docker Compose).
+ */
+module.exports = {
+  databaseUrl: process.env.DATABASE_URL,
+  migrationsTable: 'pgmigrations',
+  dir: 'migrations',
+  // Use plain SQL files (no JavaScript wrapper needed)
+  decamelize: true,
+};

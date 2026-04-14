@@ -1,0 +1,14 @@
+meta {
+  name: List Projects
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/projects?page=1&limit=20
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
