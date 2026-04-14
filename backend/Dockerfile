@@ -17,6 +17,8 @@ FROM node:20-alpine AS runtime
 RUN apk add --no-cache postgresql-client && \
     addgroup -S appgroup && adduser -S appuser -G appgroup
 
+ENV NODE_ENV=production
+
 WORKDIR /app
 
 COPY --from=builder /app/node_modules ./node_modules

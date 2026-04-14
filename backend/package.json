@@ -15,7 +15,6 @@
     "test": "jest --runInBand --forceExit"
   },
   "dependencies": {
-    "-": "^0.0.1",
     "@asteasolutions/zod-to-openapi": "^7.3.4",
     "bcryptjs": "^2.4.3",
     "express": "^4.18.2",
